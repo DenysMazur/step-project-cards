@@ -29,3 +29,20 @@
   text-align: center;
   height: calc(100vh - 30px - 30px - 100px - 15px);
 }
+
+.modal-content {
+  border-radius: 15px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    /* .login-modal */
+    max-width: 230px;
+    margin-right: 82px;
+    margin-top: 102px;   
+  }
+}

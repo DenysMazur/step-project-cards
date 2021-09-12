@@ -1,5 +1,5 @@
 import Element from "./element.js";
-import Button from "./button.js";
+import LoginButton from "./loginButton.js";
 import Image from "./image.js"
 
 export default class Header extends Element {
@@ -12,7 +12,7 @@ export default class Header extends Element {
     const logoContainer = super.createElement('div', ['header__logo']);
     const image = new Image('./img/medical-symbol.svg', 'Logo of the company');
     logoContainer.append(image.createImage())
-    const button = new Button(['btn', 'btn-primary'], 'Вход');    
+    const button = new LoginButton(['btn', 'btn-primary', 'header__login-btn'], 'Вход');    
     header.append(logoContainer, button.createButton());
     const container = document.querySelector('.root');
     container.prepend(header);

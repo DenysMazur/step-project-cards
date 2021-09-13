@@ -44,10 +44,20 @@
   background-color: rgb(206, 247, 206);
 }
 
+.warning-text {
+  font-size: 13px;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  top: 50px;
+  left: 17px;
+  /* bottom: 0; */
+}
+
 @media (min-width: 576px) {
   .login-modal {
     max-width: 230px;
-    margin-right: 82px;
+    margin-right: 65px;
     margin-top: 15px;   
   }
 }

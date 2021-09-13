@@ -10,7 +10,6 @@ export default class Element {
     element.classList.remove(...classes);
   }
   addClass(element, classes = []) {
-    console.log(classes);
     element.classList.add(...classes);
   }
   toggleClass(element, classToggle) {

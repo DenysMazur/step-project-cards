@@ -1,8 +1,8 @@
-import Element from './element.js'
+import Element from './element.js';
 
 export default class Input extends Element {
   constructor(type, placeholder) {
-    super()
+    super();
     this.type = type;
     this.placeholder = placeholder;
   }

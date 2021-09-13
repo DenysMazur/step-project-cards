@@ -1,8 +1,11 @@
-import Element from './element.js'
+import Element from './element.js';
 
 export default class ModalBackdrop extends Element {
   constructor() {
     super();
+  }
+  removeModalBackdrop() {
+    this.currentDiv.remove();
   }
 
   render() {

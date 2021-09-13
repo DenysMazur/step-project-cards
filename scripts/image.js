@@ -8,7 +8,7 @@ export default class Image extends Element {
   }
 
   createImage() {
-    const image = super.createElement('img', ['header__image'])
+    const image = super.createElement('img', ['header__image']);
     image.setAttribute('alt', this.alt);
     image.setAttribute('src', this.link);
     return image;

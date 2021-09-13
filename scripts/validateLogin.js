@@ -5,6 +5,13 @@ export default class ValidateLogin {
     this.url = 'https://ajax.test-danit.com/api/v2/cards/login';
   }
 
+  checkData() {
+    if (this.email === '' || this.password === '') {
+      return false;
+    }
+    return true;
+  }
+
   async sendRequest() {
     const response = await fetch(this.url, {
       method: 'POST',

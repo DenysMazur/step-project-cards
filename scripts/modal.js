@@ -21,6 +21,13 @@ export default class Modal extends Element{
     this.container.style.display = 'none';
     document.body.classList.remove('modal-open');
     this.modalBackdrop.removeModalBackdrop();
+    if (this.container.querySelector('.form-group')) {
+      this.container.querySelector('.form-group').reset();
+    }
+  }
+
+  submit() {
+    alert('Button is not active')
   }
 
   renderBody() {
@@ -43,7 +50,7 @@ export default class Modal extends Element{
           <div class="modal-body">            
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">${this.buttonText}</button>
+            <button type="submit" class="btn btn-primary">${this.buttonText}</button>
           </div>
         </div>
       </div>    
@@ -52,10 +59,16 @@ export default class Modal extends Element{
     const modalBody = this.container.querySelector('.modal-body');
     modalBody.append(this.renderBody());
     this.close = this.container.querySelector('.btn__close');
+    this.containerClose = this.container.querySelector('.close');
+    this.submitButton = this.container.querySelector('.btn')
     this.container.addEventListener('click', (event) => {
-      if (event.target === this.container || event.target === this.close) {
-        this.hide();
-      }          
+      if (event.target === this.container || event.target === this.close || event.target === this.containerClose) {
+        this.hide();  
+      }
+      
+      if (event.target === this.submitButton) {
+        this.submit();
+      }
     })    
     return this.container
   }

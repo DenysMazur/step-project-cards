@@ -1,6 +1,5 @@
 import Button from './button.js';
 import LoginModal from './loginModal.js';
-import ModalBackdrop from './modalBackdrop.js';
 
 export default class LoginButton extends Button {
   constructor(classes = [], text) {
@@ -12,9 +11,7 @@ export default class LoginButton extends Button {
     const loginModal = new LoginModal();
     loginModal.render();
     button.addEventListener('click', () => {
-      loginModal.showModal();
-      const modalBackdrop = new ModalBackdrop();
-      modalBackdrop.render();
+      loginModal.show();      
     })
     return button;
   }

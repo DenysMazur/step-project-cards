@@ -1,5 +1,5 @@
-import Header from './header.js'
-import Body from './body.js'
+import Header from './header.js';
+import Body from './body.js';
 
 window.addEventListener('load', () => {
   const header = new Header();
@@ -8,7 +8,3 @@ window.addEventListener('load', () => {
   cardsBody.render();
 
 })
-
-// window.addEventListener('click', (event) => {
-//   console.log(event.target);
-// })

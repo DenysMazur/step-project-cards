@@ -4,6 +4,7 @@ import ValidateLogin from './validateLogin.js';
 import Element from './element.js';
 import LocalStorageSaver from './localStorageSaver.js';
 import RenderPage from './renderPage.js';
+import tokenSaver from './tokenSaver.js';
 
 export default class LoginModal extends Modal {
   constructor(title = 'Login Form', buttonText = 'Войти') {
@@ -32,6 +33,7 @@ export default class LoginModal extends Modal {
       formContainer.append(warning);
       return;
     }
+    tokenSaver(token);
     const saveFlag = this.formData.elements[2].checked;
     const localStorageSaver = new LocalStorageSaver(saveFlag, token);
     localStorageSaver.saveData();

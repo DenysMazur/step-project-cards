@@ -7,7 +7,6 @@ export default class LocalStorageSaver {
   saveData() {
     if (this.flagOfSave) {
       localStorage.setItem('token', this.data);
-      // console.log(localStorage.getItem('token'));
     }
     return;
   }

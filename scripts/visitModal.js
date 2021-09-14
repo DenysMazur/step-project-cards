@@ -8,6 +8,7 @@ import VisitDantist from './visitDantist.js';
 import VisitCardiologist from './visitCardiologist.js';
 import VisitTherapist from './visitTherapist.js';
 
+
 export default class VisitModal extends Modal {
   constructor(title = 'Create Visit Form', buttonText = 'Create') {
     super(title, buttonText);
@@ -34,7 +35,7 @@ export default class VisitModal extends Modal {
       const warning = new Element().createElement('p', ['warning-text'], token);
       formContainer.append(warning);
       return;
-    }
+    }    
     const saveFlag = this.formData.elements[2].checked;
     const localStorageSaver = new LocalStorageSaver(saveFlag, token);
     localStorageSaver.saveData();

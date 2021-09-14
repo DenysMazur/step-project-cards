@@ -1,6 +1,6 @@
 import Element from "./element.js";
 import LoginButton from "./loginButton.js";
-import CreateVisitButton from "./createVisitButton.js";
+import VisitButton from "./visitButton.js";
 import Image from "./image.js";
 
 export default class Header extends Element {
@@ -22,7 +22,7 @@ export default class Header extends Element {
 
   createButton() {
     if (this.marker) {
-      return new CreateVisitButton(['btn', 'btn-success', 'header__visit-btn'], 'Создать визит')
+      return new VisitButton(['btn', 'btn-success', 'header__visit-btn'], 'Создать визит')
     }
     return new LoginButton(['btn', 'btn-primary', 'header__login-btn'], 'Вход');
   }

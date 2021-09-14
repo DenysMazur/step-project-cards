@@ -1,16 +1,17 @@
 import Button from './button.js';
+import VisitModal from './visitModal.js'
 
-export default class CreateVisitButton extends Button{
+export default class VisitButton extends Button{
   constructor(classes = [], text) {
     super(classes, text);
   }
 
   createButton() {
     const button = super.createButton();
-    // const loginModal = new LoginModal();
-    // loginModal.render();
+    const createVisitModal = new VisitModal();
+    createVisitModal.render();
     button.addEventListener('click', () => {
-      // loginModal.show();      
+      createVisitModal.show();      
     })
     return button;
   }

@@ -5,8 +5,19 @@ export default class ValidateLogin {
     this.url = 'https://ajax.test-danit.com/api/v2/cards/login';
   }
 
+  addAlertClass() {
+    this.email.classList.add('alert', 'alert-danger');
+    this.password.classList.add('alert', 'alert-danger');
+  }
+
+  removeAlertClass() {
+    this.email.classList.remove('alert', 'alert-danger');
+    this.password.classList.remove('alert', 'alert-danger');
+  }
+
   checkData() {
-    if (this.email === '' || this.password === '') {
+    if (this.email.value === '' || this.password.value === '') {
+      this.addAlertClass();
       return false;
     }
     return true;
@@ -18,7 +29,7 @@ export default class ValidateLogin {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: this.email, password: this.password })
+      body: JSON.stringify({ email: this.email.value, password: this.password.value })
     })
     const token = await response.text();    
     return token;

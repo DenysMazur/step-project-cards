@@ -11,26 +11,28 @@ export default class LoginModal extends Modal {
     super(title, buttonText);
   }
 
+  createWarningMessage(text) {
+    const formContainer = document.querySelector('.modal-content');
+    const warning = new Element().createElement('p', ['warning-text'], text);
+    formContainer.append(warning);
+  }
+
   async submit() {
     if (this.container.querySelector('.warning-text')) {
-      this.container.querySelector('.warning-text').remove();
-    }
-    const email = this.formData.elements[0].value;
-    const password = this.formData.elements[1].value;    
-    const validateLogin = new ValidateLogin(email, password);
-    if (!validateLogin.checkData()) {
-      this.formData.reset();
-      const formContainer = document.querySelector('.modal-content');
-      const warning = new Element().createElement('p', ['warning-text'], "Input email and password");
-      formContainer.append(warning);
+      this.container.querySelector('.warning-text').remove();    }
+    const [email, password] = this.formData.elements;    
+    this.validateLogin = new ValidateLogin(email, password);
+    if (!this.validateLogin.checkData()) {
+      this.formData.reset();      
+      this.createWarningMessage('Input email and password');
       return;
     }
-    const token = await validateLogin.sendRequest();
+    const token = await this.validateLogin.sendRequest();
+
     if (token === 'Incorrect username or password') {
       this.formData.reset();
-      const formContainer = document.querySelector('.modal-content');
-      const warning = new Element().createElement('p', ['warning-text'], token);
-      formContainer.append(warning);
+      this.validateLogin.addAlertClass();
+      this.createWarningMessage(token);      
       return;
     }
     tokenSaver(token);
@@ -50,6 +52,10 @@ export default class LoginModal extends Modal {
     if (this.container.querySelector('.warning-text')) {
       this.container.querySelector('.warning-text').remove();
     }
+    if (this.container.querySelector('.alert')) {
+      this.validateLogin.removeAlertClass();
+    }       
+    
   }
 
   renderBody() {

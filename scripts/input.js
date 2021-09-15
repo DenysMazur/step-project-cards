@@ -13,7 +13,9 @@ export default class Input extends Element {
     const input = super.createElement('input', this.classes);
     input.setAttribute('type', this.type);
     input.setAttribute('placeholder', this.placeholder);
-    input.setAttribute('required', true);
+    if (this.required) {
+      input.setAttribute('required', this.required);
+    }    
     this.checkAlertClass(input);
     return input;
   }
@@ -21,7 +23,7 @@ export default class Input extends Element {
   checkAlertClass(input) {
     input.addEventListener('change', () => {
       if (input.value !== '') {
-        input.classList.remove('alert', 'alert-danger');
+        input.classList.remove('alert-danger');
       }
     })
   }

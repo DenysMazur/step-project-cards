@@ -8,6 +8,17 @@ export default class Modal extends Element{
     this.buttonText = buttonText;
   }
 
+  createWarningMessage(text) {
+    const formContainer = document.querySelector('.modal-content');
+    this.warning = new Element().createElement('p', ['warning-text'], text);
+    formContainer.append(this.warning);
+  }
+
+  changeWarningMessage(text) {
+    this.warning.innerHTML = '';
+    this.warning.innerHTML = text;
+  }
+
   show() {
     this.container.classList.add('show');
     this.container.style.display = 'block';

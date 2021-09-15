@@ -6,13 +6,13 @@ export default class ValidateLogin {
   }
 
   addAlertClass() {
-    this.email.classList.add('alert', 'alert-danger');
-    this.password.classList.add('alert', 'alert-danger');
+    this.email.classList.add('alert-danger');
+    this.password.classList.add('alert-danger');
   }
 
   removeAlertClass() {
-    this.email.classList.remove('alert', 'alert-danger');
-    this.password.classList.remove('alert', 'alert-danger');
+    this.email.classList.remove('alert-danger');
+    this.password.classList.remove('alert-danger');
   }
 
   checkData() {

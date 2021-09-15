@@ -1,7 +1,6 @@
 import Modal from './modal.js';
 import LoginForm from './loginForm.js';
 import ValidateLogin from './validateLogin.js';
-import Element from './element.js';
 import LocalStorageSaver from './localStorageSaver.js';
 import RenderPage from './renderPage.js';
 import tokenSaver from './tokenSaver.js';
@@ -9,17 +8,12 @@ import tokenSaver from './tokenSaver.js';
 export default class LoginModal extends Modal {
   constructor(title = 'Login Form', buttonText = 'Войти') {
     super(title, buttonText);
-  }
-
-  createWarningMessage(text) {
-    const formContainer = document.querySelector('.modal-content');
-    const warning = new Element().createElement('p', ['warning-text'], text);
-    formContainer.append(warning);
-  }
+  }  
 
   async submit() {
     if (this.container.querySelector('.warning-text')) {
-      this.container.querySelector('.warning-text').remove();    }
+      this.container.querySelector('.warning-text').remove();
+    }
     const [email, password] = this.formData.elements;    
     this.validateLogin = new ValidateLogin(email, password);
     if (!this.validateLogin.checkData()) {
@@ -52,7 +46,7 @@ export default class LoginModal extends Modal {
     if (this.container.querySelector('.warning-text')) {
       this.container.querySelector('.warning-text').remove();
     }
-    if (this.container.querySelector('.alert')) {
+    if (this.container.querySelector('.alert-danger')) {
       this.validateLogin.removeAlertClass();
     }       
     
@@ -68,7 +62,7 @@ export default class LoginModal extends Modal {
     const modal = super.render();    
     this.root = document.querySelector('.root');
     this.root.insertAdjacentElement('beforeend', modal);
-    const modalContainer = document.querySelector('.modal-dialog');
+    const modalContainer = modal.querySelector('.modal-dialog');
     modalContainer.classList.add('login-modal');
   }
 }

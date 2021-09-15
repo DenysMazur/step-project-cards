@@ -1,11 +1,10 @@
 import Modal from './modal.js';
 import ValidateCreateVisit from './validateCreateVisit.js';
 import Element from './element.js';
-import RenderPage from './renderPage.js';
 import VisitForm from './visitForm.js';
-import VisitDantist from './visitDantist.js';
-import VisitCardiologist from './visitCardiologist.js';
-import VisitTherapist from './visitTherapist.js';
+import VisitDantistForm from './visitDantistForm.js';
+import VisitCardiologistForm from './visitCardiologistForm.js';
+import VisitTherapistForm from './visitTherapistForm.js';
 
 
 export default class VisitModal extends Modal {
@@ -35,8 +34,9 @@ export default class VisitModal extends Modal {
   }
   
   async submit() {
-    
-    
+    // const data = await this.validateCreateVisit.sendRequest()
+    const data = await this.validateCreateVisit.receiveRequest()
+    this.hide();
 
     
 
@@ -90,13 +90,13 @@ export default class VisitModal extends Modal {
         this.formData.querySelector('.additionalOptions').remove();
       }
       if (formSelectionDoctots.value === 'Стоматолог') {
-        const visitDantist = new VisitDantist();
+        const visitDantist = new VisitDantistForm();
         this.formData.append(visitDantist.receiveOptionsForm());
       } else if (formSelectionDoctots.value === 'Кардиолог') {
-        const visitCardiologist = new VisitCardiologist();
+        const visitCardiologist = new VisitCardiologistForm();
         this.formData.append(visitCardiologist.receiveOptionsForm());
       } else {
-        const visitTherapist = new VisitTherapist();
+        const visitTherapist = new VisitTherapistForm();
         this.formData.append(visitTherapist.receiveOptionsForm());
       }
       this.createButton.disabled = true;

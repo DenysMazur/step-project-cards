@@ -1,7 +1,7 @@
 import VisitForm from './visitForm.js';
 import Input from './input.js';
 
-export default class VisitCardiologist extends VisitForm {
+export default class VisitCardiologistForm extends VisitForm {
   constructor() {
     super();
   }

@@ -34,8 +34,17 @@ export default class VisitModal extends Modal {
   }
   
   async submit() {
-    // const data = await this.validateCreateVisit.sendRequest()
-    const data = await this.validateCreateVisit.receiveRequest()
+    const doctor = this.formData.elements[0].value
+    if (doctor === 'Стоматолог') {
+      this.cardObject = this.visitDantist.createObjectForSendingDataOnServer(this.formData.elements);
+    } else if (doctor === 'Кардиолог') {
+      this.cardObject = this.visitCardiologist.createObjectForSendingDataOnServer(this.formData.elements);
+    } else {
+      this.cardObject = this.visitTherapist.createObjectForSendingDataOnServer(this.formData.elements);
+    }
+
+    const data = await this.validateCreateVisit.sendRequest(this.cardObject);
+    // const data = await this.validateCreateVisit.receiveRequest();
     this.hide();
 
     
@@ -90,14 +99,14 @@ export default class VisitModal extends Modal {
         this.formData.querySelector('.additionalOptions').remove();
       }
       if (formSelectionDoctots.value === 'Стоматолог') {
-        const visitDantist = new VisitDantistForm();
-        this.formData.append(visitDantist.receiveOptionsForm());
+        this.visitDantist = new VisitDantistForm();
+        this.formData.append(this.visitDantist.receiveOptionsForm());
       } else if (formSelectionDoctots.value === 'Кардиолог') {
-        const visitCardiologist = new VisitCardiologistForm();
-        this.formData.append(visitCardiologist.receiveOptionsForm());
+        this.visitCardiologist = new VisitCardiologistForm();
+        this.formData.append(this.visitCardiologist.receiveOptionsForm());
       } else {
-        const visitTherapist = new VisitTherapistForm();
-        this.formData.append(visitTherapist.receiveOptionsForm());
+        this.visitTherapist = new VisitTherapistForm();
+        this.formData.append(this.visitTherapist.receiveOptionsForm());
       }
       this.createButton.disabled = true;
       this.changeWarningMessage("Fill all required fields indicated in red background");

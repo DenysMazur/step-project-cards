@@ -22,7 +22,7 @@ export default class Modal extends Element{
   show() {
     this.container.classList.add('show');
     this.container.style.display = 'block';
-    document.body.classList.add('modal-open');
+    document.body.classList.add('modal-open');    
     this.modalBackdrop = new ModalBackdrop();
     this.modalBackdrop.render();
   }
@@ -31,6 +31,7 @@ export default class Modal extends Element{
     this.container.classList.remove('show');
     this.container.style.display = 'none';
     document.body.classList.remove('modal-open');
+    document.body.removeAttribute('style');
     this.modalBackdrop.removeModalBackdrop();
     if (this.container.querySelector('.form-group')) {
       this.container.querySelector('.form-group').reset();
@@ -38,11 +39,11 @@ export default class Modal extends Element{
   }
 
   submit() {
-    alert('Button is not active')
+    alert('Button is not active');
   }
 
   renderBody() {
-    return '...'
+    return '...';
   }
   
   render() {
@@ -81,6 +82,6 @@ export default class Modal extends Element{
         this.submit();
       }
     })    
-    return this.container
+    return this.container;
   }
 }

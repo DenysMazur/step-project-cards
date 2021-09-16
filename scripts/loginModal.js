@@ -33,11 +33,9 @@ export default class LoginModal extends Modal {
     storageSaver.saveData();
     this.hide();
     this.root.innerHTML = '';
-    const renderPage = new RenderPage();
-    renderPage.render(true);
+    const renderPage = new RenderPage(true);
+    renderPage.render();
   }
-
-
 
   hide() {
     super.hide();
@@ -52,7 +50,7 @@ export default class LoginModal extends Modal {
 
   renderBody() {
     const form = new LoginForm();
-    this.formData = form.createForm()
+    this.formData = form.createForm();
     return this.formData;
   }
 

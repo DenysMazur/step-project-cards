@@ -8,7 +8,7 @@ export default class StorageSaver {
     if (this.flagOfSave) {
       localStorage.setItem('token', this.data);
     } else {
-      sessionStorage.setItem('token', this.data)
+      sessionStorage.setItem('token', this.data);
     }
     return;
   }

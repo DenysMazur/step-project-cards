@@ -4,12 +4,12 @@ import VisitButton from "./visitButton.js";
 import Image from "./image.js";
 
 export default class Header extends Element {
-  constructor() {
+  constructor(marker) {
     super();
+    this.marker = marker;
   }
 
-  render(marker) {
-    this.marker = marker;
+  render() {
     const header = super.createElement('header', ['header']);
     const logoContainer = super.createElement('div', ['header__logo']);
     const image = new Image('./img/medical-symbol.svg', 'Logo of the company');
@@ -22,7 +22,7 @@ export default class Header extends Element {
 
   createButton() {
     if (this.marker) {
-      return new VisitButton(['btn', 'btn-success', 'header__visit-btn'], 'Создать визит')
+      return new VisitButton(['btn', 'btn-success', 'header__visit-btn'], 'Создать визит');
     }
     return new LoginButton(['btn', 'btn-primary', 'header__login-btn'], 'Вход');
   }

@@ -21,7 +21,7 @@ export default class Select extends Element {
       const element = this.createOption(option);
       select.append(element);
     });
-    this.checkAlertClass(select)
+    this.checkAlertClass(select);
     return select;
   }
 

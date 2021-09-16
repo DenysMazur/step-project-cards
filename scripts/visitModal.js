@@ -21,7 +21,7 @@ export default class VisitModal extends Modal {
   validateData(formElements) {
     this.validateCreateVisit = new ValidateCreateVisit();
     this.validateCreateVisit.addAlertClassToElements(formElements);
-    this.cheackChangesInForm()
+    this.cheackChangesInForm();
   }
 
   cheackChangesInForm() {
@@ -44,39 +44,19 @@ export default class VisitModal extends Modal {
     }
 
     const data = await this.validateCreateVisit.sendRequest(this.cardObject);
-    // const data = await this.validateCreateVisit.receiveRequest();
+    //если объект получен и все ок, добавить его на страницу New Card().render() и добавить id в массив
     this.hide();
+  }
 
-    
-
-    // const [email, password] = this.formData.elements;    
-    // this.validateLogin = new ValidateLogin(email, password);
-    // if (!this.validateLogin.checkData()) {
-    //   this.formData.reset();      
-    //   this.createWarningMessage('Input email and password');
-    //   return;
-    // }
-    // const token = await this.validateLogin.sendRequest();
-
-    // if (token === 'Incorrect username or password') {
-    //   this.formData.reset();
-    //   this.validateLogin.addAlertClass();
-    //   this.createWarningMessage(token);      
-    //   return;
-    // }
-    // tokenSaver(token);
-    // const saveFlag = this.formData.elements[2].checked;
-    // const localStorageSaver = new LocalStorageSaver(saveFlag, token);
-    // localStorageSaver.saveData();
-    // this.hide();
-    // this.root.innerHTML = '';
-    // const renderPage = new RenderPage();
-    // renderPage.render(true);
+  show() {
+    super.show();
+    document.body.style.paddingRight = '17px';
   }
 
   hide() {
     super.hide();
     this.createButton.disabled = true;
+    document.body.removeAttribute('style');
     if (this.container.querySelector('.warning-text')) {
       this.changeWarningMessage("For continue to select one of the doctor");
     }

@@ -14,7 +14,7 @@ export default class ValidateCreateVisit {
     }
   }
 
-  receiveToken() {
+  getToken() {
     this.token = '';
     if (cheackLocalStorage()) {
       this.token = localStorage.getItem('token');
@@ -29,26 +29,13 @@ export default class ValidateCreateVisit {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.receiveToken()}`
+        'Authorization': `Bearer ${this.getToken()}`
       }, 
       body: JSON.stringify(
         object
       )
     })
     const data = await response.json();
-    console.log(data);   
-    return data;
-  }
-  async receiveRequest() {
-    const response = await fetch(this.url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.receiveToken()}`
-      }
-    })
-    const data = await response.json();
-    console.log(data);   
     return data;
   }
 

@@ -32,6 +32,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
   justify-items: center;
+  align-items: start;
+  row-gap: 3px;
 }
 
 .modal-content {

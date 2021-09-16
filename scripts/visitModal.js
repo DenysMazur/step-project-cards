@@ -5,6 +5,7 @@ import VisitForm from './visitForm.js';
 import VisitDantistForm from './visitDantistForm.js';
 import VisitCardiologistForm from './visitCardiologistForm.js';
 import VisitTherapistForm from './visitTherapistForm.js';
+import Card from './card.js';
 
 
 export default class VisitModal extends Modal {
@@ -45,6 +46,7 @@ export default class VisitModal extends Modal {
 
     const data = await this.validateCreateVisit.sendRequest(this.cardObject);
     //если объект получен и все ок, добавить его на страницу New Card().render() и добавить id в массив
+    const card = new Card(data).render();
     this.hide();
   }
 

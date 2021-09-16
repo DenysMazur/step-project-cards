@@ -28,4 +28,15 @@ export default class VisitForm extends Element{
     const pacient = new Input('text', ['visit__pacient', 'form-control', 'mt-1'], 'ФИО');
     this.div.append(targetVisit.createInput(), descriptionVisit.createInput(), priorityVisit.createSelect(), pacient.createInput());
   }
+
+  createObjectForSendingDataOnServer(arrayOfData) {    
+    const [doctor, target, description, priority, pacient] = Array.from(arrayOfData);
+    return {
+      doctor: `${doctor.value}`,
+      target: `${target.value}`,
+      description: `${description.value}`,
+      priority: `${priority.value}`,
+      pacient: `${pacient.value}`,
+    }
+  }
 }

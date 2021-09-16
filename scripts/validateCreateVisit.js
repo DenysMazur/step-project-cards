@@ -1,3 +1,5 @@
+import cheackLocalStorage from './api/checkLocalStorage.js';
+
 export default class ValidateCreateVisit {
   constructor() {
     this.url = 'https://ajax.test-danit.com/api/v2/cards';
@@ -5,7 +7,6 @@ export default class ValidateCreateVisit {
 
   addAlertClassToElements(formElements) {
     this.formElements = formElements;
-    // console.log(this.formElements);
     for (const element of this.formElements) {
       if (element.hasAttribute('required')) {
         element.classList.add('alert-danger');         
@@ -13,21 +14,26 @@ export default class ValidateCreateVisit {
     }
   }
 
-  async sendRequest() {
+  receiveToken() {
+    this.token = '';
+    if (cheackLocalStorage()) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = sessionStorage.getItem('token');
+    }
+    return this.token;
+  }
+
+  async sendRequest(object) {
     const response = await fetch(this.url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${this.receiveToken()}`
       }, 
-      body: JSON.stringify({
-        title: 'Визит к кардиологу',
-        description: 'Плановый визит',
-        doctor: 'Cardiologist',
-        bp: '24',
-        age: 23,
-        weight: 70
-      })
+      body: JSON.stringify(
+        object
+      )
     })
     const data = await response.json();
     console.log(data);   
@@ -38,7 +44,7 @@ export default class ValidateCreateVisit {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${this.receiveToken()}`
       }
     })
     const data = await response.json();

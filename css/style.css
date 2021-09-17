@@ -1,3 +1,6 @@
+body {
+  overflow-y: scroll;
+}
 
 .root {
   min-width: 320px;
@@ -28,7 +31,7 @@
   margin-top: 15px;
   padding: 15px;
   text-align: center;
-  min-height: calc(100vh - 30px - 30px - 100px - 15px);
+  min-height: calc(100vh - 170px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
   justify-items: center;
@@ -50,6 +53,10 @@
   background-color: rgb(206, 247, 206);
 }
 
+.modal-open {
+  overflow-y: scroll;
+}
+
 .warning-text {
   font-size: 13px;
   font-weight: bold;
@@ -66,7 +73,7 @@
 @media (min-width: 576px) {
   .login-modal {
     max-width: 230px;
-    margin-right: 82px;
+    margin-right: 73px;
     margin-top: 15px;   
   }
 }

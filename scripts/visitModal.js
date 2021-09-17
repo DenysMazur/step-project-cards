@@ -56,6 +56,7 @@ export default class VisitModal extends Modal {
   show() {
     super.show();
     document.body.style.paddingRight = '17px';
+    document.body.style.overflowY = 'hidden';
   }
 
   hide() {

@@ -27,6 +27,7 @@ export default class VisitCardiologistForm extends VisitForm {
       bmi: `${bmi.value}`,
       history: `${history.value}`,
       age: `${age.value}`,
+      close: false,
     }
   }
 }

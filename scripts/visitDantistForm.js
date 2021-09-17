@@ -21,6 +21,7 @@ export default class VisitDantistForm extends VisitForm {
       priority: `${priority.value}`,
       pacient: `${pacient.value}`,
       lastvisit: `${lastvisit.value}`,
+      close: false,
     }
   }
 }

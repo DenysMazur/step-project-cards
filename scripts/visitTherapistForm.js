@@ -21,6 +21,7 @@ export default class VisitTherapistForm extends VisitForm {
       priority: `${priority.value}`,
       pacient: `${pacient.value}`,
       age: `${age.value}`,
+      close: false,
     }
   }
 }

@@ -2,6 +2,7 @@ import Element from './element.js';
 import Button from './button.js';
 import DeleteCard from './deleteCard.js';
 import EditVisit from './editVisit.js';
+import EditForm from './editForm.js';
 
 export default class Card extends Element {
     constructor(cardItem = '') {
@@ -66,10 +67,27 @@ export default class Card extends Element {
     }
 
     createEditButton() {
-        const editButton = new Button(['edit-btn', 'btn', 'btn-outline-warning', 'btn-lg', 'btn-block', 'p-0'], 'Редактировать').createButton();
+        const editButton = new Button(['edit-btn', 'btn', 'btn-outline-warning', 'btn-lg', 'btn-block', 'p-0'], 'Редактировать').createButton();        
         editButton.addEventListener('click', () => {
-                console.log('click');
-                //сделать что-то;
+            const editForm = new EditForm(this);
+            editForm.render();
+            const btnEditor = editForm.createSubmitButton();
+            
+            btnEditor.addEventListener('click', async () => {
+                this.changedObj = editForm.createObject();
+                this.cardItem = Object.assign({}, this.changedObj);                
+                editForm.removeCurrentForm();
+                const editVisit = new EditVisit(this.cardItem.id);
+                const response = await editVisit.editVisitRequest(this.cardItem);
+                if (response.ok) {
+                    this.container.remove();
+                    this.render();
+                } else {
+                    throw new Error("Can't close visit");
+                }
+            })
+            editForm.container.append(btnEditor, editForm.createResetButton());
+
         })
         return editButton;
     }
@@ -79,7 +97,6 @@ export default class Card extends Element {
         closeVisitButton.addEventListener('click', async () => {
                 this.cardItem.close = true;
                 const {id} = this.cardItem;
-                console.log(id);
                 const editVisit = new EditVisit(id);
                 const response = await editVisit.editVisitRequest(this.cardItem);
                 if (response.ok) {
@@ -134,14 +151,14 @@ export default class Card extends Element {
         const {close} = this.cardItem;
         if (close) {
             const html = `
-            <a class="nav-link bg-success text-white disabled" href="#">Close</a>
+            <a class="nav-link bg-success text-white disabled" href="#">Closed Visit</a>
             `
             listItem.insertAdjacentHTML('beforeend', html);
             this.closeVisitButton.remove();
             this.editButton.remove();
         } else {
             const html = `
-            <a class="nav-link active disabled" href="#">Open</a>
+            <a class="nav-link active disabled" href="#">Open Visit</a>
             `
             listItem.insertAdjacentHTML('beforeend', html)
         }

@@ -45,6 +45,38 @@ export default class Card extends Element {
         
     }
 
+    editRender() {
+        this.container.innerHTML = '';
+        this.container.style.width = '18rem';
+        const html = `        
+        <div class="card-header d-flex justify-content-between">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    
+                </li>          
+            </ul>
+        </div>
+        <div class="card-body pb-0 pt-0">
+            <h6 class="card-title">Пациент: <b>${this.receivePacient()}</b></h6>
+        </div>            
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item pb-0 pt-0">Запись к: <b>${this.receiveDoctor()}</b></li>
+            </ul>
+        <div class="card-body options-button-container">
+            
+        </div>
+        `
+        this.container.insertAdjacentHTML('beforeend', html);
+        this.btnContainer = this.container.querySelector('.options-button-container');
+        this.loadMoreButton = this.createLoadmoreButton();
+        this.editButton = this.createEditButton();
+        this.closeVisitButton = this.createCloseVisitButton();
+        this.btnContainer.append(this.loadMoreButton, this.editButton, this.closeVisitButton);
+        this.headerCardContainer = this.container.querySelector('.card-header');
+        this.headerCardContainer.append(this.createDeleteCardButton());
+        this.createSatusOfVisit();
+    }
+
     createLoadmoreButton() {
         const loadMoreButton = new Button(['load-more-btn', 'btn', 'btn-outline-secondary', 'btn-lg', 'btn-block', 'p-0'], 'Показать больше').createButton();
         loadMoreButton.addEventListener('click', () => {
@@ -80,13 +112,12 @@ export default class Card extends Element {
                 const editVisit = new EditVisit(this.cardItem.id);
                 const response = await editVisit.editVisitRequest(this.cardItem);
                 if (response.ok) {
-                    this.container.remove();
-                    this.render();
+                    this.editRender();
                 } else {
                     throw new Error("Can't close visit");
                 }
             })
-            editForm.container.append(btnEditor, editForm.createResetButton());
+            editForm.btnContainer.append(btnEditor, editForm.createResetButton());
 
         })
         return editButton;

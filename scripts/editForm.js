@@ -45,12 +45,11 @@ export default class EditForm extends Element {
     this.targetRendering = this.currentCard.container;
     this.targetRendering.append(this.container);
     this.createFormElements();
-    // this.btnContainer = this.container.querySelector('.options-button-container');
-    // this.btnContainer.append(this.createSubmitButton(), this.createResetButton())
+    this.btnContainer = this.container.querySelector('.options-button-container');
   }
 
   createSubmitButton() {
-    const submitBtnObj = new Button(['btn', 'btn-primary'], 'Save');
+    const submitBtnObj = new Button(['btn', 'btn-primary', 'mr-3'], 'Save');
     const submitBtn = submitBtnObj.createButton();
     submitBtn.type = 'submit';
     return submitBtn;

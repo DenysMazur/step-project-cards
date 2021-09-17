@@ -36,7 +36,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
   justify-items: center;
   align-items: start;
-  row-gap: 3px;
+  row-gap: 140px;
 }
 
 .modal-content {

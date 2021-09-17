@@ -46,6 +46,9 @@ export default class VisitModal extends Modal {
 
     const data = await this.validateCreateVisit.sendRequest(this.cardObject);
     //если объект получен и все ок, добавить его на страницу New Card().render() и добавить id в массив
+    if (this.root.querySelector('.cards-body__title')) {
+      this.root.querySelector('.cards-body__title').remove();
+    }
     const card = new Card(data).render();
     this.hide();
   }

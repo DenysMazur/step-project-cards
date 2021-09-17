@@ -1,5 +1,6 @@
 import Element from './element.js';
 import Button from './button.js';
+import DeleteCard from './deleteCard.js';
 
 export default class Card extends Element {
     constructor(cardItem = '') {
@@ -10,34 +11,31 @@ export default class Card extends Element {
     render() {
         this.container = this.createElement('div', ['card', 'border-info'])
         this.container.style.width = '18rem';
-        const html = `
-        
+        const html = `        
         <div class="card-header d-flex justify-content-between">
-        <ul class="nav nav-pills card-header-pills">
-          <li class="nav-item">
-            <a class="nav-link active disabled" href="#">Open</a>
-          </li>          
-        </ul>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-            <div class="card-body pb-0 pt-0">
-                <h6 class="card-title">Пациент: <b>${this.receivePacient()}</b></h6>
-            </div>
-            
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active disabled" href="#">Open</a>
+                </li>          
+            </ul>
+        </div>
+        <div class="card-body pb-0 pt-0">
+            <h6 class="card-title">Пациент: <b>${this.receivePacient()}</b></h6>
+        </div>            
             <ul class="list-group list-group-flush">
                 <li class="list-group-item pb-0 pt-0">Запись к: <b>${this.receiveDoctor()}</b></li>
             </ul>
-            <div class="card-body options-button-container">
+        <div class="card-body options-button-container">
             
-            </div>
+        </div>
         `
         this.container.insertAdjacentHTML('beforeend', html);        
-        const targetRendering = document.querySelector('.cards-body');
-        targetRendering.append(this.container);
+        this.targetRendering = document.querySelector('.cards-body');
+        this.targetRendering.append(this.container);
         this.btnContainer = this.container.querySelector('.options-button-container');
-        this.btnContainer.append(this.createLoadmoreButton(), this.createEditButton(), this.createCloseVisitButton())
+        this.btnContainer.append(this.createLoadmoreButton(), this.createEditButton(), this.createCloseVisitButton());
+        this.headerCardContainer = this.container.querySelector('.card-header');
+        this.headerCardContainer.append(this.createDeleteCardButton())
         
     }
 
@@ -68,6 +66,34 @@ export default class Card extends Element {
         })
         return this.closeVisitButton;
     }
+
+    createDeleteCardButton() {
+        this.span = this.createElement('span', []);
+        this.span.innerHTML = '&times;';
+        this.span.setAttribute('aria-hidden', 'true');
+        this.closeVisitButton = new Button(['close']).createButton();
+        // this.closeVisitButton.dataset.dismiss = 'modal';
+        this.closeVisitButton.setAttribute('aria-label', 'Close');
+        this.closeVisitButton.append(this.span);
+        
+        this.closeVisitButton.addEventListener('click', async () => {
+            const {id} = this.cardItem;
+            const deleteCard = new DeleteCard(id);
+            const response = await deleteCard.deleteRequest();
+            if (response.ok) {
+                this.container.remove();
+            } else {
+                throw new Error("Can't remove");
+            }          
+            if(!this.targetRendering.querySelector('.card')) {
+                const paragrath = super.createElement('p', ['cards-body__title'], 'No items have been added');
+                this.targetRendering.append(paragrath);
+            }
+            
+        })
+        return this.closeVisitButton;
+    }
+
 
     receiveDoctor() {
         const {doctor} = this.cardItem;
@@ -113,5 +139,6 @@ export default class Card extends Element {
             currentList.insertAdjacentHTML('beforeend', html);
         }
     }
+
     
 }

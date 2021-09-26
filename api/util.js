@@ -21,7 +21,7 @@ export const postData = (url, requestBody, errorMessage) =>
         "POST",
         {
             body: requestBody,
-            mode: "cors",
+            // mode: "cors",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem(token)}`,

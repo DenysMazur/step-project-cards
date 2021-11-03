@@ -51,15 +51,16 @@ class Search extends Element {
                             for (const [key, value] of Object.entries(arr[i])) {
                                 console.log(`${key}: ${value}`);
                                 if (key == 'Doctor' && value == docType) {
+                                    
                                     selectArr.push(arr[i]);
                                     const card = new Card(arr[i]);
                                     selectCard.push(card);
                                 }
 
                             }
-                            console.log(selectArr);
-                            console.log(selectArr.length);
-                            console.log(selectCard);
+                            // console.log(selectArr);
+                            // console.log(selectArr.length);
+                            // console.log(selectCard);
                         }
 
                     }
